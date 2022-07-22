@@ -84,8 +84,10 @@ function Drive(props) {
           <div className="files-inner-container">
             {files?.map((v) => {
               return (
-                <div className="file">
+                <div className="file-conteiner">
+                  <div className="file">
                   <div onClick={() => onClickFile(v)}>{v.name}</div>{" "}
+                  </div>
                   <button onClick={() => onClickDeleteFile(v)}>X</button>
                 </div>
               );
@@ -97,9 +99,10 @@ function Drive(props) {
           <div className="folders-inner-container">
             {folders?.map((v) => {
               return (
-                <div className="folder">
-                  {" "}
+                <div className="folder-conteiner">
+                  <div className="folder">
                   <div onClick={() => onClickFolder(v)}>{v.name}</div>
+                  </div>
                   <button onClick={() => onClickDeleteFolder(v)}>X</button>
                 </div>
               );

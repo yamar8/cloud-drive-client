@@ -26,15 +26,19 @@
     height: 90%;
 }
 
-.file{
+.file-conteiner{
     width: 100px;
     height:50px;
     border-style: solid;
     margin: 10px;
+    background-color:white;
+    border-radius: 25px;
 }
-.folder{
+.folder-conteiner{
     width: 100px;
     height:50px;
     border-style: solid;
     margin: 10px;
+    background-color: yellow;
+    border-radius: 25px;
 }

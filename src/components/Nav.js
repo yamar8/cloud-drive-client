@@ -81,7 +81,6 @@ function Nav(props) {
         <div className="folder-form-container">
           <button onClick={onClickNewFolder}>New Folder</button>
           <input type="text" onChange={(e) => setFolderName(e.target.value)} />
-
         </div>
       </div>
     </div>
