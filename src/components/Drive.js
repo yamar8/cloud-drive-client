@@ -10,16 +10,22 @@ function Drive(props) {
   const [folders, setFolders] = useState([]);
 
   const onClickFile = async (v) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3002/api/files/read",
-        { name: v.name, dir: v.dir }
-      );
-      const data = response.data;
-      console.log(data);
-    } catch (e) {
-      console.log(e);
-    }
+    axios({
+      url: 'http://localhost:3002/api/files/download',
+      method: 'POST',
+      responseType: 'blob', // important
+      data: {
+        name: v.name,
+        dir: v.dir // This is the body part
+      } 
+  }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', v.name);
+      document.body.appendChild(link);
+      link.click();
+  });
   };
 
   const onClickFolder = async (v) => {
