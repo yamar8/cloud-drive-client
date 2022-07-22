@@ -8,18 +8,15 @@ function Nav(props) {
   const [file, setFile] = useState({ fileName: "", size: "", type: "" });
   const [folderName, setFolderName] = useState("");
 
-  const onClickNewFolder = () => {
+  const onClickNewFolder = async () => {
     try {
       if (!folderName) return;
-      const response = axios.post("http://localhost:3002/api/files/newfolder", {
+      const response = await axios.post("http://localhost:3002/api/files/newfolder", {
         name: folderName,
         dir: dir,
       });
-      const data = response.data;
-      console.log(data);
-      setChange((current) => {
-        return !current;
-      });
+      setChange(!change);
+      const data = response;
     } catch (e) {
       console.log(e);
     }
@@ -42,13 +39,13 @@ function Nav(props) {
     })
       .then(function (response) {
         //handle success
+        setChange(!change);
         console.log(response);
       })
       .catch(function (response) {
         //handle error
         console.log(response);
       });
-    setChange(!change);
   };
 
   const onChangeHandler = (e) => {

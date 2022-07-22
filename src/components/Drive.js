@@ -42,18 +42,18 @@ function Drive(props) {
     fetchDir();
   }, [dir, change]);
 
-  const onClickDeleteFile = (v) => {
+  const onClickDeleteFile = async (v) => {
     try {
-      const response = axios.delete(
+      const response = await axios.delete(
         "http://localhost:3002/api/files/deletefile",
         { data: { name: v.name, dir: v.dir } }
       );
-      const data = response.data;
+      const data = response;
+      if(data) setChange(!change);
       console.log(data);
     } catch (e) {
       console.log(e);
     }
-    setChange(!change);
   };
 
   const onClickDeleteFolder = (v) => {
@@ -62,14 +62,12 @@ function Drive(props) {
         "http://localhost:3002/api/files/deletefolder",
         { data: { name: v.name, dir: v.dir } }
       );
-      const data = response.data;
+      const data = response;
+      if(data) setChange(!change);
       console.log(data);
     } catch (e) {
       console.log(e);
     }
-    setChange((current) => {
-      return !current;
-    });
   };
 
   return (
