@@ -1,17 +1,21 @@
-import { getValue } from "@testing-library/user-event/dist/utils";
-import { useState } from "react";
-import "./Nav.css";
+import { useState,useContext } from "react";
+import Directory from "../Directory";
+import { dirContext } from "../Layout";
+import "./style.css";
 const axios = require("axios").default;
 
-function Nav(props) {
-  const { dir, setDir, change, setChange } = props;
+function Nav() {
+  const {dirState,changeState} = useContext(dirContext);
+  const [dir,setDir] = dirState;
+  const [change,setChange] = changeState;
+  
   const [file, setFile] = useState({ fileName: "", size: "", type: "" });
   const [folderName, setFolderName] = useState("");
 
   const onClickNewFolder = async () => {
     try {
       if (!folderName) return;
-      const response = await axios.post("http://localhost:3002/api/files/newfolder", {
+      const response = await axios.post("https://drive-server-yamar8.herokuapp.com/api/files/newfolder", {
         name: folderName,
         dir: dir,
       });
@@ -33,7 +37,7 @@ function Nav(props) {
     console.log(bodyFormData);
     axios({
       method: "post",
-      url: "http://localhost:3002/api/files/upload",
+      url: "https://drive-server-yamar8.herokuapp.com/api/files/upload",
       data: bodyFormData,
       headers: { "Content-Type": "multipart/form-data" },
     })

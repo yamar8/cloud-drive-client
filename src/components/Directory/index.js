@@ -1,11 +1,14 @@
-import './Directory.css';
+import './style.css';
+import {useContext} from 'react';
+import { dirContext } from '../Layout';
 
-function Directory(props){
+function Directory(){
 
-    const {dir,setDir} = props;
+  const {dirState} = useContext(dirContext);
+  const [dir,setDir] = dirState;
 
     const onClickBack = () => {
-        if (dir === "uploads") return; //root folder - there is no back
+        if (dir === "uploads") return; //root folder - prevent user from back
         setDir((current) => {
           return current.slice(0, current.lastIndexOf("/"));
         });
@@ -16,7 +19,7 @@ function Directory(props){
 
         <div className="diractory">
             <button onClick={onClickBack}>Back</button>
-            <div>dir: {JSON.stringify(dir)}</div>
+            <div>dir: {dir}</div>
           </div>
 
 
